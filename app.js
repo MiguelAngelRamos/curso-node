@@ -10,5 +10,5 @@ const port = process.env.PORT || 3001; //* en caso que llegue fallar tenemos el 
 //* pasamos como primer argumento el puerto y luego una función 
 app.listen(port, () => {
   //* alt + 96 
-  console.log(`http://localhost:${port}`);
+  console.log(`Servidor en linea : http://localhost:${port}`);
 });
