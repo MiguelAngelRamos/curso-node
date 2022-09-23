@@ -10,7 +10,7 @@ const dbConnect = () => {
   }, (err, res) => {
     if(!err) {
       //* si no hay un error
-      console.log("*** CONEXIÓN CORRECTA ***");
+      console.log("*** CONEXIÓN HACIA LA BASE DATOS, CORRECTA ***");
     } else {
       console.log("*** ERROR EN LA CONEXIÓN *** ");
     }
