@@ -5,6 +5,6 @@ const {createUser, getUsers } = require("../controllers/users-controller");
 //* GET http://localhost:3000/api/users
 router.get("/", getUsers); 
 //* POST http://localhost:3000/api/users
-router.post("/", createUser);
+router.post("/",createUser);
 
 module.exports = router;
