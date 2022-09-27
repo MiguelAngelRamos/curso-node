@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors()); //* para evitar el error de origen cruzado, por el momento todos los clientes se pueden conectar
 app.use(express.json()); //* Con esto le indicamos a nuestro backend que reciba información en el método POST
+app.use(express.static("storage")); //* para hacer accesible las imagenes, le indicamos a express cual va ser la carpeta de los estaticos publicos
 const port = process.env.PORT || 3001; //* en caso que llegue fallar tenemos el puerto 3001
 
 //* Aqui vamos a cargar nuestras rutas
