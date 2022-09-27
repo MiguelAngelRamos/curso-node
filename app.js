@@ -5,7 +5,7 @@ const dbConnect = require("./config/mongo");
 const app = express();
 
 app.use(cors()); //* para evitar el error de origen cruzado, por el momento todos los clientes se pueden conectar
-
+app.use(express.json()); //* Con esto le indicamos a nuestro backend que reciba información en el método POST
 const port = process.env.PORT || 3001; //* en caso que llegue fallar tenemos el puerto 3001
 
 //* Aqui vamos a cargar nuestras rutas
@@ -14,7 +14,6 @@ const port = process.env.PORT || 3001; //* en caso que llegue fallar tenemos el 
 // app.use("/api", (req, res) => {
 //   res.send({ saludo: 'Hola Ruta accedida'});
 // });
-
 app.use("/api", require("./routes"));
 
 //* pasamos como primer argumento el puerto y luego una función 

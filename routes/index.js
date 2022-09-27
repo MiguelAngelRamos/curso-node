@@ -19,9 +19,7 @@ fs.readdirSync(PATH_ROUTES).filter( file => {
   if(name !== 'index') {
     console.log('Loading...' + name);
     //* alt + 96 ``
-    router.use(`/${name}`, (req, res) => {
-      res.send({ aviso: 'la ruta dinamica se creo'})
-    });
+    router.use(`/${name}`, require(`./${file}`));
   }
 });
 module.exports = router;

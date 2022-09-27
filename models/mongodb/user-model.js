@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-
 const UserScheme = new mongoose.Schema(
   {
     name: {
-      type: String
+      type: String,
     },
     email: {
       type: String,
@@ -17,7 +16,7 @@ const UserScheme = new mongoose.Schema(
     }
   },
   {
-    timestamps: true,
+    timestamps: true, //* createdAt, updateAt
     versionKey: false,
   }
 );
