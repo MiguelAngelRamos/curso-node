@@ -15,9 +15,14 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    
+    req = matchedData(req);
+    const { id } = req;
+    // const id = req.id;
+    const data = await usersModel.findById(id).exec();
+    res.send({data});
+    //* antes de llegar aca necesitamos el id que sea de tipo mongo id
   } catch (error) {
-    
+    handleHttpError(res, `ERROR_GET_USER_BY_ID, ${error}`);
   }
 }
 
@@ -44,4 +49,4 @@ const createUser = async (req, res) => {
 
 };
 
-module.exports = { getUsers, createUser };
+module.exports = { getUsers, createUser, getUserById };

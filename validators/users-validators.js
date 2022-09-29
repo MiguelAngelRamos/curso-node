@@ -18,4 +18,7 @@ const validatorGetUser = [
   (req, res, next) => validateResults(req, res, next)
 ];
 
-module.exports = { validatorCreateUser, validatorGetUser };
+module.exports = { 
+                  validatorCreateUser, 
+                  validatorGetUser 
+                };
