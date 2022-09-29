@@ -5,10 +5,21 @@ const { handleHttpError } = require('../utils/handle-error');
 
 //* Obtener la lista de usuarios de la base de datos
 const getUsers = async (req, res) => {
-  const data = await usersModel.find({}); //* traiga todos los usuarios
-  res.send({data});
+  try {
+    const data = await usersModel.find({}); //* traiga todos los usuarios
+    res.send({data});
+  } catch (error) {
+    handleHttpError(res, `ERROR_GET_USERS, ${error}`);
+  }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
 
 //* Crear un Usuario dentro de la base de datos
 const createUser = async (req, res) => {
@@ -24,7 +35,8 @@ const createUser = async (req, res) => {
     // res.send({bodyDirty, bodyClean });
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, error);
+    // handleHttpError(res, error);
+    handleHttpError(res, `ERROR_CREATE_USER, ${error}`);
     // res.status(403);
     // res.send({ error });
     //* en mongoDb "code": 11000, es de clave duplicada
