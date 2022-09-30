@@ -46,7 +46,18 @@ const createUser = async (req, res) => {
     // res.send({ error });
     //* en mongoDb "code": 11000, es de clave duplicada
   }
-
 };
 
-module.exports = { getUsers, createUser, getUserById };
+//* Eliminar un Usuario
+const deleteUser = async (req, res) => {
+  try {
+    req = matchedData(req);
+    const { id } = req;
+    const info = await usersModel.deleteOne({_id: id});
+    res.send({info});
+  } catch (error) {
+    handleHttpError(res, `ERROR_DELETE_USER, ${error}`)
+  }
+};
+
+module.exports = { getUsers, createUser, getUserById, deleteUser };
