@@ -1,5 +1,6 @@
 const { matchedData } = require("express-validator");
 const { usersModel } = require('../models');
+const userModel = require("../models/mongodb/user-model");
 const { handleHttpError } = require('../utils/handle-error');
 //* El controlador se encarga de la logica de nuestra aplicación (API)
 
@@ -47,6 +48,16 @@ const createUser = async (req, res) => {
     //* en mongoDb "code": 11000, es de clave duplicada
   }
 };
+//* Actualizar el Usuario
+const updateUser = async (req, res) => {
+  try {
+     const {id, ...body }= matchedData(req);
+     const data = await userModel.findByIdAndUpdate({_id: id}, body, { new: true});
+     res.send({ data });
+  } catch (error) {
+    handleHttpError(res, `ERROR_UPDATE_USERS, ${error}`);
+  }
+};
 
 //* Eliminar un Usuario
 const deleteUser = async (req, res) => {
@@ -60,4 +71,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, createUser, getUserById, deleteUser };
+module.exports = { getUsers, createUser, getUserById, deleteUser, updateUser};
