@@ -59,16 +59,28 @@ const updateUser = async (req, res) => {
   }
 };
 
-//* Eliminar un Usuario
+//* Eliminacion Logica
 const deleteUser = async (req, res) => {
   try {
     req = matchedData(req);
     const { id } = req;
-    const info = await usersModel.deleteOne({_id: id});
+    const info = await usersModel.delete({_id: id});
     res.send({info});
   } catch (error) {
     handleHttpError(res, `ERROR_DELETE_USER, ${error}`)
   }
 };
+
+//* Eliminar un Usuario Fisica
+// const deleteUser = async (req, res) => {
+//   try {
+//     req = matchedData(req);
+//     const { id } = req;
+//     const info = await usersModel.deleteOne({_id: id});
+//     res.send({info});
+//   } catch (error) {
+//     handleHttpError(res, `ERROR_DELETE_USER, ${error}`)
+//   }
+// };
 
 module.exports = { getUsers, createUser, getUserById, deleteUser, updateUser};

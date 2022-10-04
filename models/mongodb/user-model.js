@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const mongooseDelete = require("mongoose-delete");
+
 const UserScheme = new mongoose.Schema(
   {
     name: {
@@ -20,5 +22,7 @@ const UserScheme = new mongoose.Schema(
     versionKey: false,
   }
 );
+
+UserScheme.plugin(mongooseDelete, {overrideMethods: 'all'}); //* para sobreescribir los métodos de moongose
 //* "users" es el nombre de la colección, lo que se conoce en Sql como nombre de la tabla
 module.exports = mongoose.model("users", UserScheme);
