@@ -13,10 +13,10 @@ const validatorCreateUser = [
 ];
 
 //* Validador para la Ruta por ID
-const validatorGetUser = [
-  check("id").exists().notEmpty().isMongoId(),
-  (req, res, next) => validateResults(req, res, next)
-];
+// const validatorGetUser = [
+//   check("id").exists().notEmpty().isMongoId(),
+//   (req, res, next) => validateResults(req, res, next)
+// ];
 
 module.exports = { 
                   validatorCreateUser, 

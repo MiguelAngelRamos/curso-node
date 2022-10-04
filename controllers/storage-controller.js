@@ -8,6 +8,15 @@ const getRegisterImages = async (req, res) => {
   res.send({data});
 };
 
+//*GET image por ID
+const getImageById = async () => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
+
 //* POST Para crear el registro de la imagen
 const createImage = async (req, res) => {
   const { body, file } = req; //* body, file
@@ -24,4 +33,5 @@ const createImage = async (req, res) => {
   const data = await storageModel.create(fileData);
   res.send(data);
 };
+
 module.exports = { getRegisterImages, createImage };
