@@ -2,7 +2,7 @@ const { storageModel } = require('../models');
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
 //* GET obtener el registro la Imagen
-const getImage = async (req, res) => {
+const getRegisterImages = async (req, res) => {
   const data = await storageModel.find({});
   // res.send({data: data});
   res.send({data});
@@ -24,4 +24,4 @@ const createImage = async (req, res) => {
   const data = await storageModel.create(fileData);
   res.send(data);
 };
-module.exports = { getImage, createImage };
+module.exports = { getRegisterImages, createImage };
