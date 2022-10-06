@@ -2,6 +2,8 @@
 const { matchedData } = require('express-validator');
 const { userSystemModel } = require('../models');
 const { handleHttpError } = require('../utils/handle-error');
+const { encrypt } = require('../utils/handle-password');
+
 
 
 //* Registrar un Usuario
@@ -9,8 +11,13 @@ const registerUserSystemController = async (req, res) => {
   try {
     req = matchedData(req);
     //* encriptar la password
-    //* const passwordHash = 
+    const passwordHash = await encrypt(req.password);
+    const body  = { ...req, password: passwordHash};
+    const dataUserSystem = await userSystemModel.create(body);
+    res.send({dataUserSystem});
   } catch (error) {
-    
+    handleHttpError(res, `ERROR_REGISTER_USER_SYSTEM, ${error}`);
   }
 };
+
+module.exports = { registerUserSystemController };
