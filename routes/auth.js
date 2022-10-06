@@ -11,3 +11,5 @@ const router = express.Router();
 //* http://localhost:3000/api/auth/register
 
 router.post("/register", validatorRegisterUser, registerUserSystemController);
+
+module.exports = router;

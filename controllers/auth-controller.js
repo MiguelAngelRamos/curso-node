@@ -14,6 +14,8 @@ const registerUserSystemController = async (req, res) => {
     const passwordHash = await encrypt(req.password);
     const body  = { ...req, password: passwordHash};
     const dataUserSystem = await userSystemModel.create(body);
+    //* No voy a pasar la password
+    dataUserSystem.set("password", undefined, { strict: false });
     res.send({dataUserSystem});
   } catch (error) {
     handleHttpError(res, `ERROR_REGISTER_USER_SYSTEM, ${error}`);
