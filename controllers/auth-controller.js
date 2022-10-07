@@ -2,8 +2,8 @@
 const { matchedData } = require('express-validator');
 const { userSystemModel } = require('../models');
 const { handleHttpError } = require('../utils/handle-error');
+const { tokenSign } = require('../utils/handle-jwt');
 const { encrypt } = require('../utils/handle-password');
-
 
 
 //* Registrar un Usuario
@@ -16,7 +16,11 @@ const registerUserSystemController = async (req, res) => {
     const dataUserSystem = await userSystemModel.create(body);
     //* No voy a pasar la password
     dataUserSystem.set("password", undefined, { strict: false });
-    res.send({dataUserSystem});
+    const data = {
+      token: tokenSign(dataUserSystem),
+      user: dataUserSystem
+    }
+    res.send({data});
   } catch (error) {
     handleHttpError(res, `ERROR_REGISTER_USER_SYSTEM, ${error}`);
   }
