@@ -3,7 +3,7 @@ const { matchedData } = require('express-validator');
 const { userSystemModel } = require('../models');
 const { handleHttpError } = require('../utils/handle-error');
 const { tokenSign } = require('../utils/handle-jwt');
-const { encrypt } = require('../utils/handle-password');
+const { encrypt, compare } = require('../utils/handle-password');
 
 
 //* Registrar un Usuario
@@ -26,4 +26,36 @@ const registerUserSystemController = async (req, res) => {
   }
 };
 
-module.exports = { registerUserSystemController };
+const loginUserSystemController = async (req, res) => {
+  try {
+    req = matchedData(req);
+    //* Buscar al usuario en la base de datos
+    const user = await userSystemModel.findOne({email: req.email}).select('password name role email');
+
+    if(!user) {
+      handleHttpError(res, `USER_NOT_EXISTS`, 404);
+      return;
+    }
+    //* El usuario si existe!
+    const hashPassword = user.get('password');
+    //* vamos a comparar
+    const check = await compare(req.password, hashPassword);
+
+    if(!check) {
+      handleHttpError(res, "CRENDENCIALES_INCORRECTA", 401);
+      return;
+    }
+
+    user.set('password', undefined, { strict: false });
+    const data = {
+      token: tokenSign(user),
+      user
+      // user: user
+    }
+    res.send({data});
+  } catch (error) {
+    handleHttpError(res, `USER_NOT_EXISTS`, 404);
+  }
+};
+
+module.exports = { registerUserSystemController, loginUserSystemController };

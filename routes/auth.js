@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUserSystemController } = require("../controllers/auth-controller");
+const { registerUserSystemController, loginUserSystemController } = require("../controllers/auth-controller");
 //* controladores loginController, registerController
 //* Modelo
 //* Validators para login y register
@@ -11,5 +11,6 @@ const router = express.Router();
 //* http://localhost:3000/api/auth/register
 
 router.post("/register", validatorRegisterUser, registerUserSystemController);
+router.post("/login", validatorLoginUser, loginUserSystemController);
 
 module.exports = router;
