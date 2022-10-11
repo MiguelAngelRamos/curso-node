@@ -55,4 +55,15 @@ const swaggerDefinition = {
     }
    }
   }
-}
+};
+
+/**
+ * Opciones
+ *  */
+const options = {
+  swaggerDefinition,
+  apis: ["./routes/*.js"]
+};
+
+const openApiConfiguration = swaggerJsDoc(options);
+module.exports = openApiConfiguration;
