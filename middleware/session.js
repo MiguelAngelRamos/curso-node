@@ -24,9 +24,10 @@ const authMiddleware = async (req, res, next) => {
     //* Quien es el usuario que esta consumiendo el token?
     const user = await userSystemModel.findById(dataToken._id);
     req.user = user; //* inyectamos al usuario en la request
+    next(); //* continua hacia el controlador
 
   } catch (error) {
-    
+    handleHttpError(res, `NOT_SESSION, ${error}`, 401);
   }
-}
-
+};
+module.exports = authMiddleware;
