@@ -3,7 +3,7 @@ const { handleHttpError } = require("../utils/handle-error");
 const checkRol = (roles) => (req, res, next) => {
   try {
     const { user } = req; //* traemos al usuario que esta intentando hacer la petición
-    //* console.log(users);
+    console.log(user);
     //* Extraer los roles
     const rolesByUser = user.role; //* trae por defecto user
 
