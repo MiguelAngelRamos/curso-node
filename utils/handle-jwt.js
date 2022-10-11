@@ -16,4 +16,13 @@ const tokenSign = user => {
   return sign;
 }
 
-module.exports = { tokenSign };
+//* verificar que el token sea el correcto firmado por nuestro backend
+const verifyToken = async (tokenJwt) => {
+  try {
+    return jwt.verify(tokenJwt, JWT_SECRET);
+  } catch (error) {
+    console.log(e);
+    // return null;
+  }
+};
+module.exports = { tokenSign, verifyToken };
