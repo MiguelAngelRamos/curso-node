@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router(); //* Extraer de express lo que nos ayudara a trabajar con las rutas
 const {createUser, getUsers, getUserById, deleteUser, updateUser } = require("../controllers/users-controller");
+//* el guardian
+const authMiddleware = require("../middleware/session");
+
 const { validatorCreateUser } = require("../validators/users-validators");
 const { validatorGetIdMongo } = require("../validators/validator-idmongo");
 
 //* GET http://localhost:3000/api/users
-router.get("/", getUsers); 
+router.get("/", authMiddleware, getUsers);
 //* GET  http://localhost:3000/api/users/"ELID"
 router.get("/:id",validatorGetIdMongo , getUserById);
 //* POST http://localhost:3000/api/users
