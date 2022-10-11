@@ -35,6 +35,24 @@ const swaggerDefinition = {
         },
       },
     },
+    authRegister: {
+      type: "object",
+      required: ["email", "password", "age", "name"],
+      properties: {
+        name: {
+          type: "string"
+        },
+        age: {
+          type: "string"
+        },
+        email: {
+          type: "string"
+        },
+        password: {
+          type: "string"
+        }
+      }
+    }
    }
   }
 }
