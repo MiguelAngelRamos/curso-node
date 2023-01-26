@@ -3,6 +3,7 @@ const { handleHttpError } = require("../utils/handle-error");
 const { verifyToken } = require("../utils/handle-jwt");
 
 const authMiddleware = async (req, res, next) => {
+  console.log(req.headers);
   try {
 
     if(!req.headers.authorization) {
@@ -17,13 +18,13 @@ const authMiddleware = async (req, res, next) => {
     const dataToken = await verifyToken(token);
 
     //* Asegurarnos que el token tenga el _id
-    if(!dataToken._id) {
-      handleHttpError(res, "ERROR_ID_TOKEN", 401);
-      return;
-    }
+    // if(!dataToken._id) {
+    //   handleHttpError(res, "ERROR_ID_TOKEN", 401);
+    //   return;
+    // }
     //* Quien es el usuario que esta consumiendo el token?
-    const user = await userSystemModel.findById(dataToken._id);
-    req.user = user; //* inyectamos al usuario en la request
+    // const user = await userSystemModel.findById(dataToken._id);
+    // req.user = user; //* inyectamos al usuario en la request
     next(); //* continua hacia el controlador
 
   } catch (error) {

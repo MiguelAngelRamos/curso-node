@@ -2,13 +2,16 @@ const { matchedData } = require("express-validator");
 const { usersModel } = require('../models');
 const userModel = require("../models/mongodb/user-model");
 const { handleHttpError } = require('../utils/handle-error');
+const { dbMockUsers } = require("../db/db.mock");
 //* El controlador se encarga de la logica de nuestra aplicación (API)
 
 //* Obtener la lista de usuarios de la base de datos
 const getUsers = async (req, res) => {
   try {
-    const data = await usersModel.find({}); //* traiga todos los usuarios
-    res.send({data});
+    // const data = await usersModel.find({}); //* traiga todos los usuarios
+
+    //* Data Simulada
+    res.send(dbMockUsers);
   } catch (error) {
     handleHttpError(res, `ERROR_GET_USERS, ${error}`);
   }

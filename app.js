@@ -3,10 +3,9 @@ const express = require("express");
 const cors = require("cors");
 //* Documentacion Swagger
 
-const swaggerUI = require("swagger-ui-express");
+// const swaggerUI = require("swagger-ui-express");
 const openApiConfiguration = require("./docs/swagger");
-
-const dbConnect = require("./config/mongo");
+// const dbConnect = require("./config/mongo");
 const app = express();
 
 app.use(cors()); //* para evitar el error de origen cruzado, por el momento todos los clientes se pueden conectar
@@ -14,7 +13,7 @@ app.use(express.json()); //* Con esto le indicamos a nuestro backend que reciba 
 app.use(express.static("storage")); //* para hacer accesible las imagenes, le indicamos a express cual va ser la carpeta de los estaticos publicos
 const port = process.env.PORT || 3001; //* en caso que llegue fallar tenemos el puerto 3001
 
-app.use('/documentation', swaggerUI.serve, swaggerUI.setup(openApiConfiguration));
+// app.use('/documentation', swaggerUI.serve, swaggerUI.setup(openApiConfiguration));
 
 //* Aqui vamos a cargar nuestras rutas
 //* http://localhost:3000/api/"nombreDeLaRuta"
@@ -29,4 +28,4 @@ app.listen(port, () => {
   //* alt + 96 
   console.log(`Servidor en linea : http://localhost:${port}`);
 });
-dbConnect();
+// dbConnect();
